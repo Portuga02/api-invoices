@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,15 @@ class InvoicesFactory extends Factory
      */
     public function definition(): array
     {
+        $paid = $this->faker->boolean();
         return [
-            //
+           'user_id' => User::all()->random->id,
+           'type' => $this->faker->randomElement(['B','C','P']), //[BOETO, CARTAO E PIX]
+            'paid' => $paid,
+            'value' => $this->faker->numberBetween(int1:1000, int2:2147483647),
+            'payment_date' => $paid ? $this->faker->randowElement([$this->faker->dateTimeThisMonth()]) : null
+
+
         ];
     }
 }
