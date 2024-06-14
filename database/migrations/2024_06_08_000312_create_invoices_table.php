@@ -12,10 +12,10 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('type');
+            $table->string('type',50);
             $table->boolean('paid'); //0 = para pago 1 = para pago
             $table->decimal('value', total:10, places:2);
             $table->datetime('payment_date')->nullable();
