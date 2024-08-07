@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\Invoices;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,9 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
 
-        \App\Models\Invoices::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Invoices::factory(10)->create();
+
+        // Recupera todos os registros de Invoice do banco de dados
+        $invoices = Invoices::all();
+
+        // Acessa aleatoriamente um registro da coleção
+        $randomInvoice = $invoices->random();
+
+
     }
 }
